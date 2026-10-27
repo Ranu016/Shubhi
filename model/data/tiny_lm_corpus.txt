@@ -1,0 +1,11 @@
+shubhi is a student project about learning artificial intelligence by building small working examples. a language model learns patterns from text and uses those patterns to predict what comes next. text is split into tokens. this small exercise uses one character as one token so the vocabulary is easy to inspect.
+
+a transformer language model reads a sequence of characters. an embedding changes each character id into a vector. positional embeddings tell the model where each character appears. causal self attention lets a character use earlier characters but prevents it from looking at the future. a feed forward layer processes each position. the final layer predicts the next character.
+
+training starts with random weights. the model sees a short piece of text and tries to predict the next character at every position. cross entropy measures its prediction error. backpropagation computes gradients and the optimizer updates the weights. after many examples the loss should decrease. generation starts with a short prompt and repeatedly samples a predicted next character.
+
+the shubhi project has several learning stages. python runs the programs. pytorch provides tensors and automatic gradients. transformers can load a pretrained model. fine tuning continues training an existing model on a small new dataset. training from scratch starts with new random weights and teaches a tiny model patterns from text.
+
+this tiny language model is for learning only. its training text is small, its vocabulary is limited, and its answers are not reliable. a successful training run shows the basic process, not a useful general purpose assistant. larger language models need much more data, compute, testing, and careful evaluation.
+
+shubhi learns step by step. first prepare a text dataset. then make a vocabulary and encode the text. next build a small causal transformer and train it to predict characters. watch the training loss. finally save the learned weights and ask the model to continue a prompt. each stage makes one part of language modeling easier to understand.

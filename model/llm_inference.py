@@ -1,6 +1,7 @@
 """Client for the local llama.cpp chat server."""
 
 import json
+from typing import Sequence
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -8,14 +9,23 @@ from urllib.request import Request, urlopen
 CHAT_API_URL = "http://127.0.0.1:8080/v1/chat/completions"
 
 
-def generate_response(prompt: str, max_tokens: int = 128) -> str:
-    """Send a prompt to the local model and return its answer."""
+def generate_response(
+    prompt: str,
+    max_tokens: int = 128,
+    history: Sequence[dict[str, str]] = (),
+) -> str:
+    """Send a prompt and optional prior chat messages to the local model."""
     if not prompt.strip():
         raise ValueError("prompt must not be empty")
+    if max_tokens < 1:
+        raise ValueError("max_tokens must be at least 1")
+
+    messages = list(history)
+    messages.append({"role": "user", "content": f"{prompt.rstrip()} /no_think"})
 
     body = {
         "model": "local-model",
-        "messages": [{"role": "user", "content": f"{prompt.rstrip()} /no_think"}],
+        "messages": messages,
         "max_tokens": max_tokens,
         "temperature": 0.7,
     }
