@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local model weights and checkpoints
+model/weights/
+model/runner/
+*.gguf
+*.safetensors
+*.pt
+*.pth
